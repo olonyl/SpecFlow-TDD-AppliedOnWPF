@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="TrueOrFalse.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             Height="300">
+    <DockPanel>
+        <Menu Height="30" FontSize="14" DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem x:Name="NewDb" Header="New" />
+                <MenuItem x:Name="OpenDb" Header="Open" />
+                <MenuItem x:Name="SaveDb" Header="Save" />
+                <MenuItem x:Name="SaveDbAs" Header="SaveAs..." />
+                <MenuItem x:Name="StartGame" Header="StartGame" />
+                <Separator />
+                <MenuItem x:Name="Exit" Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem x:Name="Cut" Header="Cut" />
+                <MenuItem x:Name="Copy" Header="Copy" />
+                <MenuItem x:Name="Paste" Header="Paste" />
+            </MenuItem>
+        </Menu>
+
+        <Grid Margin="12" Height="45" DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="AddStatement"                        
+                        Margin="3" Width="80" Content="Add" />
+                <Button x:Name="RemoveStatement" Margin="3" Width="80" Content="Remove" />
+                <Button x:Name="SaveStatement" Margin="3" Width="80" Content="Save" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
+                <xctk:IntegerUpDown x:Name="StatementNumber"
+                                    Value="{Binding CurrentNumber, Mode=TwoWay}"                                    
+                                    Minimum="1" DefaultValue="1" Text="1"
+                                    Margin="3" Width="60" />
+                <CheckBox x:Name="TrueFalseMark" Margin="3"
+                          AutomationProperties.AutomationId="StatementFlag"
+                          IsChecked="{Binding CurrentStatement.IsTrue, Mode=TwoWay}"
+
+                          VerticalAlignment="Center" Content="Is true?" />
+            </StackPanel>
+        </Grid>
+
+        <TextBox x:Name="StatementText" 
+                 AutomationProperties.AutomationId="CurrentStatement"
+                 Text="{Binding CurrentStatement.Text, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}" />
+    </DockPanel>
+</UserControl>
